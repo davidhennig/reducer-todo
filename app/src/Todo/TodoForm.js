@@ -3,12 +3,9 @@ import React, { useState, useReducer } from "react";
 import { reducer, initialState } from "../reducers/reducer";
 
 const TodoForm = props => {
-  const [toDoState, dispatch] = useReducer(reducer, initialState);
+  const { toDoState, dispatch } = props;
   const [newTodoText, setNewTodoText] = useState("");
 
-  const handleComplete = () => {
-    dispatch({ type: "CLEAR_COMPLETED" });
-  };
   const handleChanges = e => {
     setNewTodoText(e.target.value);
   };
@@ -25,11 +22,14 @@ const TodoForm = props => {
       <button
         onClick={() => {
           dispatch({ type: "UPDATE_TODO", payload: newTodoText });
+          setNewTodoText("");
         }}
       >
         Add Todo
       </button>
-      <button onClick={handleComplete}>Clear Completed</button>
+      <button onClick={() => dispatch({ type: "CLEAR_COMPLETED" })}>
+        Clear Completed
+      </button>
     </div>
   );
 };

@@ -2,8 +2,13 @@ export const initialState = {
   items: [
     {
       item: "Learn about reducers",
-      completed: false,
+      completed: true,
       id: 3892987589
+    },
+    {
+      item: "Don't learn about reducers",
+      completed: false,
+      id: 5415665416
     }
   ]
 };
@@ -22,20 +27,27 @@ export const reducer = (state, action) => {
         ]
       };
       return newObject;
+    case "MARK_COMPLETED":
+      return {
+        ...state,
+        items: state.items.map(element => {
+          if (element.id === action.payload) {
+            return {
+              ...element,
+              completed: !element.completed
+            };
+          }
+          return element;
+        })
+      };
     case "CLEAR_COMPLETED":
       return {
         ...state,
-        item: action.payload
+        items: state.items.filter(element => {
+          return !element.completed;
+        })
       };
     default:
       return state;
   }
 };
-
-// removeItem = () => {
-//     this.setState({
-//       data: this.state.data.filter(element => {
-//         return !element.completed;
-//       })
-//     });
-//   };

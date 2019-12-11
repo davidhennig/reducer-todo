@@ -8,9 +8,9 @@ const App = () => {
 
   return (
     <div>
-      <TodoList toDoState={toDoState} />
+      <TodoList dispatch={dispatch} toDoState={toDoState} />
       <h2>Add New Tasks Below</h2>
-      <TodoForm />
+      <TodoForm dispatch={dispatch} toDoState={toDoState} />
     </div>
   );
 };
